@@ -10,21 +10,24 @@ description: |
 grade: devel # must be 'stable' to release into candidate/stable channels
 confinement: devmode # use 'strict' once you have the right plugs and slots
 
-parts:
-    #    libaio:
-    #    plugin: make
-    #    source: http://http.debian.net/debian/pool/main/liba/libaio/libaio_0.3.110.orig.tar.gz
+apps:
+    dynamo:
+        command: dynamo
 
+
+parts:
     iometer:
         plugin: make
         source: tar/iometer-1.1.0-src.tar.bz2
+        source-subdir: src
+#        stage:
+#          - ../
         artifacts: 
             - .
         prepare: |
             echo $PWD
-            cd src/
-            echo $PWD
-            ls -l
-        makefile: ./Makefile-Linux.x86_64
+        makefile: Makefile-Linux.x86_64
         make-parameters:
             - all
+#        prime:
+#          - ../
